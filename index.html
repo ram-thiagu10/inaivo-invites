@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arjun Sharma & Riya Deshmukh — Wedding Celebrations</title>
+  <meta name="description" content="Join Arjun Sharma & Riya Deshmukh for wedding and reception celebrations on 01 and 02 September 2026." />
+  <link rel="icon" type="image/png" href="./assets/seal.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div id="door-overlay">
+    <div class="door-panel door-left">
+      <div class="door-border-inner"></div>
+    </div>
+    <div class="door-panel door-right">
+      <div class="door-border-inner"></div>
+    </div>
+    
+    <div class="door-lock" id="door-lock" onclick="openDoors()">
+      <div class="lock-circle">
+        <span style="font-size: 32px; display: block; margin-bottom: 4px;">🌸</span>
+        <p style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pastel-gold);">Tap to Enter</p>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="./assets/invite_tone.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">
+    <svg id="music-icon-on" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M9 18V5l12-2v13" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="16" r="3" />
+    </svg>
+    <svg id="music-icon-off" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+      <path d="M9 18V5l12-2v13" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="16" r="3" />
+      <line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+  </button>
+
+  <canvas id="sparkle-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>
+
+  <nav>
+    <a href="#couple">The Couple</a>
+    <a href="#events">Celebrations</a>
+    <a href="#venues">Venues</a>
+    <a href="#wishes">Wishes</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-border"></div>
+    <div class="hero-eyebrow">|| Shri Ganeshaya Namah ||<br>Together with their families, you are lovingly invited to celebrate the marriage of</div>
+    <h1 class="hero-names">Arjun Sharma <br><span class="hero-amp">&amp;</span> Riya Deshmukh</h1>
+    <div class="hero-divider"></div>
+    <div class="hero-date">02 SEPTEMBER 2026 &bull; MUMBAI</div>
+  </div>
+
+  <section id="couple">
+    <p class="section-eyebrow">Introducing</p>
+    <h2 class="section-title">The Bride <em>&amp;</em> Groom</h2>
+    
+    <div class="couple-grid">
+      <div class="person-card">
+        <div class="person-card-inner">
+          <span class="person-role">The Groom</span>
+          <h3 class="person-name">Arjun Sharma</h3>
+          <p class="person-parents">Son of Mr. Devendra &amp; Mrs. Sharda Sharma</p>
+          <span class="person-title-badge">Tech Visionary &amp; Adventurer</span>
+          <p class="person-desc">
+            Arjun is a compassionate, tech-loving soul who balances his days building intelligent systems with his passions for classic acoustic guitar music and mountain trekking. Known for his witty sense of humor and calm demeanor, he is excited to step into this beautiful next chapter of his journey with Riya by his side.
+          </p>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="person-card-inner">
+          <span class="person-role">The Bride</span>
+          <h3 class="person-name">Riya Deshmukh</h3>
+          <p class="person-parents">Daughter of Mr. Ramesh &amp; Mrs. Sunita Deshmukh</p>
+          <span class="person-title-badge">Creative Designer &amp; Artist</span>
+          <p class="person-desc">
+            Riya is an expressive artist with a flair for architectural patterns, interior landscapes, and soulful classical dance. Warm-hearted and boundlessly creative, her vibrant energy brightens every room she steps into. She looks forward to painting a beautiful, adventure-filled future together with Arjun.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kolam-divider">
+    <div class="line"></div>
+    <span>🌸</span>
+    <div class="line rev"></div>
+  </div>
+
+  <section id="events">
+    <p class="section-eyebrow">The Celebrations</p>
+    <h2 class="section-title">Wedding Schedule</h2>
+    <div class="events-stack">
+      <div class="event-card">
+        <div class="event-date-block">
+          <span class="event-day">01</span>
+          <span class="event-month">Sept</span>
+          <span class="event-weekday">Tuesday</span>
+        </div>
+        <div class="event-details">
+          <h3 class="event-name">Sangeet &amp; Ring Ceremony</h3>
+          <p class="event-time">⏰ 6:30 PM Onwards</p>
+          <p class="event-venue"><span class="event-venue-name">The Grand Pastel Ballroom</span><br>Galaxy Highway Resorts, Mumbai</p>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-date-block">
+          <span class="event-day">02</span>
+          <span class="event-month">Sept</span>
+          <span class="event-weekday">Wednesday</span>
+        </div>
+        <div class="event-details">
+          <h3 class="event-name">Muhurtham &amp; Reception</h3>
+          <p class="event-time">⏰ 10:30 AM (Wedding) &bull; 7:00 PM (Reception)</p>
+          <p class="event-venue"><span class="event-venue-name">Royal Heritage Pavilion</span><br>Marine Drive Vista, Mumbai</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="venues">
+    <p class="section-eyebrow">Getting There</p>
+    <h2 class="section-title"><em>Venues</em> at a Glance</h2>
+
+    <div class="venues-grid" style="display: flex; justify-content: center;">
+      <div class="venue-card">
+        <div class="venue-card-accent"></div>
+        <div style="position:relative; z-index:1;">
+          <p class="venue-tag">RECEPTION & WEDDING</p>
+          <p class="venue-name">Royal Heritage Pavilion</p>
+          <p class="venue-address">Marine Drive Vista, South Mumbai, Maharashtra 400020</p>
+          
+          <div class="venue-directions-wrap">
+            <p class="venue-directions-title">HOW TO REACH THE VENUE</p>
+            <div class="venue-directions">
+              <div><strong>✈️ From Chhatrapati Shivaji Maharaj International Airport:</strong> ~25 km away. Take a prepaid taxi or ride-share via the Sea Link (45-60 mins depending on traffic).</div>
+              <div><strong>🚂 From CSMT Railway Station:</strong> ~3 km away. A short 10-minute taxi or local cab ride directly to the venue.</div>
+              <div><strong>🚗 By Road:</strong> Head towards South Mumbai via Marine Drive. Valet parking is available at the pavilion gates.</div>
+            </div>
+            
+            <div style="margin-top:20px; display: flex; justify-content: center;">
+              <a class="map-btn" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                <span>Open in Google Maps</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="wishes">
+    <p class="section-eyebrow">From the Heart</p>
+    <h2 class="section-title">Send Your <em>Wishes</em></h2>
+
+    <div class="wish-form-container">
+      <div class="wish-form-grid">
+        <div>
+          <label class="wish-label">Your Name *</label>
+          <input id="wish-name" type="text" placeholder="e.g. Rahul & Family" class="wish-input" />
+        </div>
+        <div>
+          <label class="wish-label">Relation to Couple</label>
+          <input id="wish-relation" type="text" placeholder="e.g. Groom's Colleague" class="wish-input" />
+        </div>
+      </div>
+      <div style="margin-bottom:20px;">
+        <label class="wish-label">Your Wish *</label>
+        <textarea id="wish-message" rows="4" placeholder="Write your heartfelt wishes for Arjun & Riya" class="wish-input"></textarea>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <button id="wish-submit" onclick="submitWish()" class="wish-submit-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+          </svg>
+          <span>Send Wishes</span>
+        </button>
+        <span id="wish-status" style="font-size:13px; color:var(--text-soft); font-style:italic;"></span>
+      </div>
+    </div>
+
+    <div id="wishes-wall" class="wishes-grid">
+      <div id="wishes-placeholder" class="wishes-placeholder">
+        🌸 Wishes from loved ones will appear here…
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-names">Arjun &amp; Riya</div>
+    <div class="footer-tagline">September 2026 · Mumbai, Maharashtra</div>
+    <div class="footer-note">Made with love · Two families, one beautiful beginning</div>
+     <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(212,175,55,0.2); display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+  <span style="color: var(--text-on-dark-muted); font-size: 11px; letter-spacing: 0.04em;">Designed by:</span>
+  <img src="./assets/inaivo_invites.jpeg" alt="Inaivo Invites" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; opacity: 0.9;" />
+  <a href="https://instagram.com/inaivo.invites" target="_blank" rel="noopener noreferrer"
+    style="color: var(--gold-light); text-decoration: none; font-size: 11px; letter-spacing: 0.04em;"
+    onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gold-light)'">
+    📸 @inaivo.invites
+  </a>
+  <a href="tel:7373219594" style="color: var(--text-on-dark-muted); font-size: 11px; letter-spacing: 0.04em; text-decoration: none;">
+    📞 7373219594
+  </a>
+</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
