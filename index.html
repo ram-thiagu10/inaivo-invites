@@ -193,7 +193,7 @@
   .occasions-head h2{font-size:clamp(28px,3.8vw,42px);}
   .occasions-head h2 em{font-style:italic; color:var(--rose-deep);}
   .occasions-grid{
-    display:grid; grid-template-columns:repeat(5,1fr); gap:20px; max-width:1180px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:20px; max-width:1180px; margin:0 auto;
   }
   .occasion-card{
     background:var(--paper); border:1px solid var(--line); border-radius:18px;
@@ -209,13 +209,7 @@
     padding:5px 11px; border-radius:100px; border:1px solid var(--line); color:var(--ink-soft);
   }
   .occasion-status.live{background:var(--rose); border-color:var(--rose); color:var(--paper);}
-
-  @media (max-width: 1024px){
-    .occasions-grid{grid-template-columns:repeat(3,1fr);}
-  }
-  @media (max-width: 620px){
-    .occasions-grid{grid-template-columns:repeat(2,1fr);}
-  }
+  .occasion-card.open{border-style:dashed;}
 
   /* ---------- TEMPLATES ---------- */
   .templates{background:var(--cream-deep); padding:130px 0;}
@@ -336,6 +330,11 @@
     color:var(--rose-deep); border:1px solid var(--rose); border-radius:100px; padding:4px 12px; margin-bottom:18px;
   }
   .tier h3{font-family:'Cormorant Garamond', serif; font-size:26px; font-weight:600; margin-bottom:10px;}
+  .tier-price{
+    font-family:'Cormorant Garamond', serif; font-size:30px; font-weight:600; color:var(--rose-deep);
+    margin-bottom:14px;
+  }
+  .tier-price span{font-family:'Jost', sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em;}
   .tier p.tier-desc{font-size:14px; color:var(--ink-soft); margin-bottom:22px; min-height:44px;}
   .tier ul{list-style:none;}
   .tier li{font-size:13.5px; color:var(--ink-soft); padding:8px 0; border-top:1px solid var(--line); display:flex; gap:9px; align-items:flex-start;}
@@ -430,7 +429,7 @@
       <div class="phil-stats">
         <div class="phil-stat"><b>1</b><span>Link for everything</span></div>
         <div class="phil-stat"><b>∞</b><span>Guests can revisit</span></div>
-        <div class="phil-stat"><b>5</b><span>Occasions, one studio</span></div>
+        <div class="phil-stat"><b>Any</b><span>Occasion, one studio</span></div>
       </div>
     </div>
   </div>
@@ -447,7 +446,7 @@
     <div class="occasions-head reveal">
       <div class="eyebrow center">WHAT WE DESIGN FOR</div>
       <h2>One studio, <em>every</em> occasion</h2>
-      <p>Beyond weddings, Inaivo Invites is opening its shelf to every celebration worth a beautiful link.</p>
+      <p>Here's where we've started — if it's worth celebrating, it's worth a beautiful link.</p>
     </div>
     <div class="occasions-grid">
       <div class="occasion-card reveal">
@@ -479,6 +478,12 @@
         <h3>House Warmings</h3>
         <p>Welcome guests to your new address with the details in one place.</p>
         <span class="occasion-status">Coming to the shelf</span>
+      </div>
+      <div class="occasion-card open reveal">
+        <svg class="occasion-icon" viewBox="0 0 48 48"><path d="M24,10 L26,20 L36,22 L26,24 L24,34 L22,24 L12,22 L22,20 Z" fill="none" stroke="#B8933A" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Something Else?</h3>
+        <p>Anniversaries, farewells, naming days — if you're celebrating it, we'll build for it.</p>
+        <span class="occasion-status">Tell us your occasion</span>
       </div>
     </div>
   </div>
@@ -559,6 +564,7 @@
       <div class="tiers">
         <div class="tier reveal">
           <h3>Basic</h3>
+          <div class="tier-price">₹1,500 <span>/ event</span></div>
           <p class="tier-desc">A beautifully designed single page to open every invitation with.</p>
           <ul>
             <li>Your names, story &amp; date</li>
@@ -569,6 +575,7 @@
         <div class="tier featured reveal">
           <span class="tier-pill">Most chosen</span>
           <h3>Silver</h3>
+          <div class="tier-price">₹2,500 <span>/ event</span></div>
           <p class="tier-desc">Everything in Basic, for celebrations across multiple events.</p>
           <ul>
             <li>Full celebrations timeline</li>
@@ -578,10 +585,12 @@
         </div>
         <div class="tier reveal">
           <h3>Gold</h3>
+          <div class="tier-price">₹3,500 <span>/ event</span></div>
           <p class="tier-desc">The complete experience, tailored end to end.</p>
           <ul>
             <li>Everything in Silver</li>
             <li>Photo gallery &amp; custom animation</li>
+            <li>Translation in your language</li>
             <li>Priority design revisions</li>
           </ul>
         </div>
