@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inaivo Invites — Your Story, Beautifully Shared</title>
+<link rel="icon" type="image/png" href="assets/inaivo-invites-logo.png">
+<meta name="description" content="Inaivo Invites designs elegant digital invitation websites for weddings, engagements, birthdays, baby showers and house warmings — countdowns, details and wishes, woven into one beautiful page.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF3E8;
+    --cream-deep:#F1E7D6;
+    --paper:#FFFDF9;
+    --ink:#1B2A47;
+    --ink-soft:#3C4A68;
+    --rose:#C97A6D;
+    --rose-deep:#AE5B4E;
+    --gold:#B8933A;
+    --gold-soft:#D9BD79;
+    --line:rgba(27,42,71,0.14);
+    --shadow: 0 30px 60px -30px rgba(27,42,71,0.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    color:var(--ink);
+    letter-spacing:0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--gold-soft); color:var(--ink);}
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    font-size:12.5px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before, .eyebrow.center::after{
+    content:"";
+    display:block;
+    width:34px;
+    height:1px;
+    background:var(--gold);
+  }
+  .eyebrow.center{justify-content:center;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:22px 0;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  header.scrolled{
+    background:rgba(250,243,232,0.92);
+    backdrop-filter:blur(10px);
+    padding:14px 0;
+    box-shadow:0 1px 0 var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{height:38px; width:auto; flex-shrink:0; object-fit:contain;}
+  .brand-name{font-family:'Cormorant Garamond', serif; font-size:22px; letter-spacing:0.08em; font-weight:600;}
+  .brand-name span{color:var(--rose-deep); font-style:italic; font-weight:500;}
+  .nav-links{display:flex; gap:40px; font-size:13px; letter-spacing:0.14em; text-transform:uppercase;}
+  .nav-links a{position:relative; padding-bottom:4px;}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold);
+    transition:width .3s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    border:1px solid var(--ink); padding:9px 22px; font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase;
+    border-radius:100px; transition:all .3s ease;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--cream);}
+  .menu-btn{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:140px 32px 100px;
+    overflow:hidden;
+  }
+  .hero-thread{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-46%);
+    width:min(720px, 130vw);
+    opacity:0.85;
+    pointer-events:none;
+  }
+  .thread-path{
+    fill:none;
+    stroke-linecap:round;
+  }
+  .thread-a{stroke:var(--ink); stroke-width:2; stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 2.6s ease forwards .3s;}
+  .thread-b{stroke:var(--rose); stroke-width:2; stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 2.6s ease forwards .6s;}
+  .thread-c{stroke:var(--gold); stroke-width:1.4; stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 2.2s ease forwards 1s;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  .hero-inner{position:relative; z-index:2;}
+  .hero h1{
+    font-size:clamp(42px, 7vw, 86px);
+    line-height:1.06;
+    margin:0 auto 22px;
+    max-width:900px;
+    font-weight:500;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--rose-deep);
+    font-weight:500;
+  }
+  .hero p.lede{
+    max-width:520px;
+    margin:0 auto 40px;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+  .hero-ctas{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 30px;
+    font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
+    border-radius:100px;
+    transition:all .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .btn-primary{background:var(--ink); color:var(--cream);}
+  .btn-primary:hover{background:var(--rose-deep); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink); transform:translateY(-2px);}
+
+  .scroll-cue{
+    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+    font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--ink-soft);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .scroll-cue::after{
+    content:""; width:1px; height:34px; background:linear-gradient(var(--gold), transparent);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.3;} 50%{opacity:1;}}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- PHILOSOPHY ---------- */
+  .philosophy{padding:150px 0 130px; position:relative;}
+  .phil-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; align-items:start;}
+  .philosophy h2{font-size:clamp(30px,3.6vw,44px); line-height:1.18; font-weight:500;}
+  .philosophy h2 em{font-style:italic; color:var(--rose-deep);}
+  .phil-right p{color:var(--ink-soft); font-size:16px; margin-bottom:22px; max-width:480px;}
+  .phil-right p:last-child{margin-bottom:0;}
+  .phil-stats{display:flex; gap:56px; margin-top:44px;}
+  .phil-stat b{font-family:'Cormorant Garamond', serif; font-size:38px; font-weight:600; color:var(--rose-deep); display:block;}
+  .phil-stat span{font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft);}
+
+  /* ---------- divider ---------- */
+  .divider{padding:0 0 20px; display:flex; justify-content:center;}
+  .divider svg{width:120px; height:28px;}
+
+  /* ---------- OCCASIONS ---------- */
+  .occasions{padding:10px 0 120px;}
+  .occasions-head{text-align:center; max-width:600px; margin:0 auto 60px;}
+  .occasions-head h2{font-size:clamp(28px,3.8vw,42px);}
+  .occasions-head h2 em{font-style:italic; color:var(--rose-deep);}
+  .occasions-grid{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:20px; max-width:1180px; margin:0 auto;
+  }
+  .occasion-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px;
+    padding:34px 20px 28px; text-align:center;
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .occasion-card:hover{transform:translateY(-6px); box-shadow:var(--shadow); border-color:transparent;}
+  .occasion-icon{width:44px; height:44px; margin:0 auto 20px;}
+  .occasion-card h3{font-size:19px; font-weight:600; margin-bottom:10px;}
+  .occasion-card p{font-size:12.5px; color:var(--ink-soft); line-height:1.55; min-height:56px;}
+  .occasion-status{
+    display:inline-block; margin-top:16px; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase;
+    padding:5px 11px; border-radius:100px; border:1px solid var(--line); color:var(--ink-soft);
+  }
+  .occasion-status.live{background:var(--rose); border-color:var(--rose); color:var(--paper);}
+
+  @media (max-width: 1024px){
+    .occasions-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width: 620px){
+    .occasions-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* ---------- TEMPLATES ---------- */
+  .templates{background:var(--cream-deep); padding:130px 0;}
+  .templates-head{text-align:center; max-width:640px; margin:0 auto 70px;}
+  .templates-head h2{font-size:clamp(30px,4vw,48px);}
+  .templates-head h2 em{font-style:italic; color:var(--rose-deep);}
+  .templates-head p{color:var(--ink-soft); margin-top:18px; font-size:16px;}
+
+  .showcase{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:36px;
+    max-width:940px;
+    margin:0 auto;
+  }
+  .template-card{
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+  }
+  .tc-preview{
+    background:
+      radial-gradient(circle at 30% 20%, rgba(201,122,109,0.16), transparent 55%),
+      linear-gradient(160deg, #fffdf9 0%, #f4ead9 100%);
+    position:relative;
+    padding:38px 32px;
+    display:flex; flex-direction:column; justify-content:center;
+    border-right:1px solid var(--line);
+    min-height:340px;
+  }
+  .browser-chrome{
+    position:absolute; top:20px; left:20px; right:20px;
+    display:flex; gap:6px;
+  }
+  .browser-chrome span{width:8px; height:8px; border-radius:50%; background:var(--line);}
+  .tc-preview-content{text-align:center;}
+  .tc-couple{
+    font-family:'Cormorant Garamond', serif;
+    font-size:30px;
+    line-height:1.3;
+  }
+  .tc-couple em{font-style:italic; color:var(--rose-deep); font-size:22px; display:block; margin:2px 0;}
+  .tc-sub{font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft); margin-top:14px;}
+  .tc-badges{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:26px;}
+  .tc-badges span{
+    font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+    border:1px solid var(--line); border-radius:100px; padding:6px 13px; color:var(--ink-soft);
+  }
+  .tc-body{padding:44px 40px; display:flex; flex-direction:column;}
+  .tc-tag{font-size:11.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:14px;}
+  .tc-body h3{font-size:28px; margin-bottom:14px; font-weight:500;}
+  .tc-body p{color:var(--ink-soft); font-size:15px; margin-bottom:26px;}
+  .tc-features{list-style:none; margin-bottom:30px;}
+  .tc-features li{
+    font-size:14px; color:var(--ink-soft); padding:9px 0; border-top:1px solid var(--line);
+    display:flex; align-items:center; gap:10px;
+  }
+  .tc-features li:first-child{border-top:none;}
+  .tc-features li::before{content:"◆"; color:var(--gold); font-size:8px;}
+  .tc-link{
+    margin-top:auto;
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink);
+    padding-bottom:2px; border-bottom:1px solid var(--ink); width:fit-content;
+    transition:gap .3s ease, color .3s ease, border-color .3s ease;
+  }
+  .tc-link:hover{gap:16px; color:var(--rose-deep); border-color:var(--rose-deep);}
+
+  .ghost-card{
+    border:1px dashed var(--line);
+    border-radius:22px;
+    padding:50px 40px;
+    text-align:center;
+    color:var(--ink-soft);
+    max-width:940px;
+    margin:36px auto 0;
+  }
+  .ghost-card .serif{font-size:22px; color:var(--ink); display:block; margin-bottom:8px;}
+  .ghost-card p{font-size:14.5px;}
+
+  /* ---------- PROCESS ---------- */
+  .process{padding:140px 0;}
+  .process-head{text-align:center; max-width:600px; margin:0 auto 76px;}
+  .process-head h2{font-size:clamp(30px,4vw,48px);}
+  .process-head h2 em{font-style:italic; color:var(--rose-deep);}
+
+  .steps{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    max-width:1000px; margin:0 auto 100px;
+    position:relative;
+  }
+  .steps::before{
+    content:""; position:absolute; top:24px; left:8%; right:8%; height:1px;
+    background:repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 14px);
+  }
+  .step{padding:0 24px; position:relative; text-align:center;}
+  .step-num{
+    width:48px; height:48px; border-radius:50%; background:var(--cream); border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond', serif; font-size:18px; color:var(--rose-deep);
+    margin:0 auto 26px; position:relative; z-index:2;
+  }
+  .step h3{font-size:22px; margin-bottom:12px; font-weight:500;}
+  .step p{font-size:14.5px; color:var(--ink-soft); max-width:250px; margin:0 auto;}
+
+  .tiers{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; max-width:1000px; margin:0 auto;}
+  .tier{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:38px 30px;
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .tier:hover{transform:translateY(-6px); box-shadow:var(--shadow); border-color:transparent;}
+  .tier.featured{border-color:var(--rose); position:relative;}
+  .tier-pill{
+    display:inline-block; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--rose-deep); border:1px solid var(--rose); border-radius:100px; padding:4px 12px; margin-bottom:18px;
+  }
+  .tier h3{font-family:'Cormorant Garamond', serif; font-size:26px; font-weight:600; margin-bottom:10px;}
+  .tier p.tier-desc{font-size:14px; color:var(--ink-soft); margin-bottom:22px; min-height:44px;}
+  .tier ul{list-style:none;}
+  .tier li{font-size:13.5px; color:var(--ink-soft); padding:8px 0; border-top:1px solid var(--line); display:flex; gap:9px; align-items:flex-start;}
+  .tier li:first-child{border-top:none;}
+  .tier li::before{content:"✦"; color:var(--gold); font-size:10px; margin-top:2px;}
+
+  /* ---------- CTA / CONTACT ---------- */
+  .contact{
+    background:var(--ink); color:var(--cream); padding:130px 0; text-align:center; position:relative; overflow:hidden;
+  }
+  .contact::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(201,122,109,0.22), transparent 60%);
+  }
+  .contact-inner{position:relative; z-index:2;}
+  .contact .eyebrow{color:var(--gold-soft); justify-content:center;}
+  .contact .eyebrow::before{background:var(--gold-soft);}
+  .contact h2{color:var(--cream); font-size:clamp(32px,5vw,58px); max-width:700px; margin:0 auto 24px;}
+  .contact h2 em{font-style:italic; color:var(--rose);}
+  .contact p{color:rgba(250,243,232,0.72); max-width:460px; margin:0 auto 42px; font-size:16px;}
+  .contact .btn-primary{background:var(--cream); color:var(--ink);}
+  .contact .btn-primary:hover{background:var(--rose);}
+  .contact-links{
+    margin-top:56px; display:flex; gap:44px; justify-content:center; flex-wrap:wrap;
+    font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(250,243,232,0.75);
+  }
+  .contact-links a{border-bottom:1px solid transparent; transition:border-color .3s ease, color .3s ease;}
+  .contact-links a:hover{border-color:var(--gold-soft); color:var(--cream);}
+
+  footer{
+    padding:34px 0; text-align:center; font-size:12px; letter-spacing:0.08em; color:var(--ink-soft);
+    text-transform:uppercase; background:var(--cream);
+  }
+
+  @media (max-width: 880px){
+    .nav-links{display:none;}
+    .phil-grid{grid-template-columns:1fr; gap:36px;}
+    .template-card{grid-template-columns:1fr;}
+    .tc-preview{border-right:none; border-bottom:1px solid var(--line);}
+    .steps{grid-template-columns:1fr; gap:50px;}
+    .steps::before{display:none;}
+    .tiers{grid-template-columns:1fr;}
+    .phil-stats{gap:34px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <img class="brand-mark" src="assets/inaivo-invites-icon.png" alt="Inaivo Invites">
+      <span class="brand-name">INAIVO <span>Invites</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#occasions">Occasions</a>
+      <a href="#work">Featured Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Start your story</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <svg class="hero-thread" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+    <path class="thread-path thread-a" d="M60,40 C60,110 60,150 60,220"/>
+    <path class="thread-path thread-b" d="M540,40 C540,110 540,150 540,220"/>
+    <path class="thread-path thread-c" d="M60,130 C180,60 200,60 300,130 C400,200 420,200 540,130"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="eyebrow center">DIGITAL INVITATIONS FOR EVERY CELEBRATION</div>
+    <h1>Your story, <em>beautifully</em><br>shared — online.</h1>
+    <p class="lede">Inaivo Invites designs elegant, one-page invitation websites for weddings, engagements, birthdays, baby showers and house warmings — countdowns, details and wishes, woven into a single link your guests will love opening.</p>
+    <div class="hero-ctas">
+      <a href="#occasions" class="btn btn-primary">See what we design for</a>
+      <a href="#contact" class="btn btn-ghost">Enquire for your event</a>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<section class="philosophy">
+  <div class="wrap phil-grid">
+    <div class="reveal">
+      <div class="eyebrow">THE IDEA</div>
+      <h2>Every occasion,<br>one <em>page</em>,<br>every guest invited.</h2>
+    </div>
+    <div class="phil-right reveal">
+      <p>"Inaivo" means union — and that's exactly what your celebration's website should hold. Not a printed card that gets misplaced, but a living page: a countdown ticking toward your day, the details guests actually need, directions they can follow, and a wall where wishes arrive in real time.</p>
+      <p>Whether it's a wedding, an engagement, a birthday, a baby shower or a house warming, every site is built from scratch around your names, your colours and your calendar — then handed to you as a single link, ready to share on WhatsApp, Instagram, or a printed invite.</p>
+      <div class="phil-stats">
+        <div class="phil-stat"><b>1</b><span>Link for everything</span></div>
+        <div class="phil-stat"><b>∞</b><span>Guests can revisit</span></div>
+        <div class="phil-stat"><b>5</b><span>Occasions, one studio</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal">
+  <svg viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,14 C25,2 30,26 45,14 C55,6 65,22 75,14 C85,6 95,22 115,14" fill="none" stroke="#B8933A" stroke-width="1.2"/>
+  </svg>
+</div>
+
+<section class="occasions" id="occasions">
+  <div class="wrap">
+    <div class="occasions-head reveal">
+      <div class="eyebrow center">WHAT WE DESIGN FOR</div>
+      <h2>One studio, <em>every</em> occasion</h2>
+      <p>Beyond weddings, Inaivo Invites is opening its shelf to every celebration worth a beautiful link.</p>
+    </div>
+    <div class="occasions-grid">
+      <div class="occasion-card reveal">
+        <svg class="occasion-icon" viewBox="0 0 48 48"><circle cx="18" cy="28" r="10" fill="none" stroke="#1B2A47" stroke-width="1.6"/><circle cx="30" cy="28" r="10" fill="none" stroke="#B8933A" stroke-width="1.6"/></svg>
+        <h3>Weddings</h3>
+        <p>Countdowns, celebration timelines, venue maps and a wishes wall.</p>
+        <span class="occasion-status live">Live template</span>
+      </div>
+      <div class="occasion-card reveal">
+        <svg class="occasion-icon" viewBox="0 0 48 48"><circle cx="24" cy="30" r="11" fill="none" stroke="#1B2A47" stroke-width="1.6"/><path d="M24,19 L19,12 L29,12 Z" fill="none" stroke="#B8933A" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Engagements</h3>
+        <p>A page to hold the promise — story, date and the moment itself.</p>
+        <span class="occasion-status">Coming to the shelf</span>
+      </div>
+      <div class="occasion-card reveal">
+        <svg class="occasion-icon" viewBox="0 0 48 48"><rect x="10" y="26" width="28" height="14" rx="2" fill="none" stroke="#1B2A47" stroke-width="1.6"/><path d="M10,26 Q24,20 38,26" fill="none" stroke="#1B2A47" stroke-width="1.6"/><line x1="24" y1="18" x2="24" y2="10" stroke="#B8933A" stroke-width="1.6"/><path d="M22,10 Q24,6 26,10" fill="none" stroke="#B8933A" stroke-width="1.6"/></svg>
+        <h3>Birthdays</h3>
+        <p>Playful or elegant — a countdown and details page for the big day.</p>
+        <span class="occasion-status">Coming to the shelf</span>
+      </div>
+      <div class="occasion-card reveal">
+        <svg class="occasion-icon" viewBox="0 0 48 48"><path d="M14,30 C14,22 20,18 26,20 C32,22 34,28 30,34 C26,40 16,38 14,30 Z" fill="none" stroke="#1B2A47" stroke-width="1.6"/><path d="M16,26 C20,24 24,24 27,26" fill="none" stroke="#B8933A" stroke-width="1.6"/></svg>
+        <h3>Baby Showers</h3>
+        <p>A gentle page for the details, the registry and the well-wishes.</p>
+        <span class="occasion-status">Coming to the shelf</span>
+      </div>
+      <div class="occasion-card reveal">
+        <svg class="occasion-icon" viewBox="0 0 48 48"><path d="M10,26 L24,14 L38,26" fill="none" stroke="#1B2A47" stroke-width="1.6" stroke-linejoin="round"/><path d="M14,24 V38 H34 V24" fill="none" stroke="#1B2A47" stroke-width="1.6"/><circle cx="24" cy="31" r="2.4" fill="none" stroke="#B8933A" stroke-width="1.4"/></svg>
+        <h3>House Warmings</h3>
+        <p>Welcome guests to your new address with the details in one place.</p>
+        <span class="occasion-status">Coming to the shelf</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="templates" id="work">
+  <div class="wrap">
+    <div class="templates-head reveal">
+      <div class="eyebrow center">COMPLETED PROJECTS</div>
+      <h2>A story we've already <em>woven</em></h2>
+      <p>We don't start from a template and swap in your photos. We start by listening — to your story, your colours, your calendar — then design and build your page from zero around it. Here's what that's looked like so far.</p>
+    </div>
+
+    <div class="showcase">
+      <div class="template-card reveal">
+        <div class="tc-preview">
+          <div class="browser-chrome"><span></span><span></span><span></span></div>
+          <div class="tc-preview-content">
+            <div class="tc-couple">One Story<em>told in full</em></div>
+            <div class="tc-sub">Built from scratch around one real celebration</div>
+            <div class="tc-badges">
+              <span>Countdown</span>
+              <span>Celebrations</span>
+              <span>Venue Map</span>
+              <span>Wishes Wall</span>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-tag">Completed Project</div>
+          <h3>Built From Their Story, Not a Template</h3>
+          <p>Every element here — the opening moment, the countdown, the timeline, the wishes wall — was designed around one family's real story and real dates, not pulled from a template library.</p>
+          <ul class="tc-features">
+            <li>A custom opening moment, designed around the occasion</li>
+            <li>Live countdown to the big day</li>
+            <li>Full event timeline with calendar downloads</li>
+            <li>Venue directions by air, rail and road</li>
+            <li>Guest wishes, collected in real time</li>
+          </ul>
+          <a href="https://inaivo-invites-vijay-weds-santhoshi.vercel.app/" target="_blank" rel="noopener" class="tc-link">See the completed project →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ghost-card reveal">
+      <span class="serif">More stories, joining soon</span>
+      <p>Every new couple adds another card here. Yours could be next.</p>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="process-head reveal">
+      <div class="eyebrow center">HOW IT WORKS</div>
+      <h2>From your story to a <em>shareable link</em></h2>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Share your story</h3>
+        <p>Names, dates, venues, photos and the little details that make your day yours.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3>We design &amp; build</h3>
+        <p>A one-page site is designed around your palette, then built with your timeline, maps and RSVP wall.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>You share &amp; celebrate</h3>
+        <p>One link goes out to every guest — and wishes start arriving before the day even begins.</p>
+      </div>
+    </div>
+
+    <div id="packages">
+      <div class="tiers">
+        <div class="tier reveal">
+          <h3>Basic</h3>
+          <p class="tier-desc">A beautifully designed single page to open every invitation with.</p>
+          <ul>
+            <li>Your names, story &amp; date</li>
+            <li>Live countdown</li>
+            <li>One venue with directions</li>
+          </ul>
+        </div>
+        <div class="tier featured reveal">
+          <span class="tier-pill">Most chosen</span>
+          <h3>Silver</h3>
+          <p class="tier-desc">Everything in Basic, for celebrations across multiple events.</p>
+          <ul>
+            <li>Full celebrations timeline</li>
+            <li>Multiple venues &amp; calendar downloads</li>
+            <li>Guest wishes wall</li>
+          </ul>
+        </div>
+        <div class="tier reveal">
+          <h3>Gold</h3>
+          <p class="tier-desc">The complete experience, tailored end to end.</p>
+          <ul>
+            <li>Everything in Silver</li>
+            <li>Photo gallery &amp; custom animation</li>
+            <li>Priority design revisions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-inner">
+    <div class="eyebrow">LET'S BEGIN</div>
+    <h2>Ready to share <em>your</em> story?</h2>
+    <p>Send over your names and your date — we'll take it from there.</p>
+    <a href="tel:7373219594" class="btn btn-primary">Call to enquire</a>
+    <div class="contact-links">
+      <a href="tel:7373219594">📞 7373219594</a>
+      <a href="https://instagram.com/inaivo.invites" target="_blank" rel="noopener">📸 @inaivo.invites</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="assets/inaivo-invites-logo.png" alt="Inaivo Invites — Your story. Beautifully shared." style="width:120px; height:auto; margin:0 auto 14px;">
+  <div>Inaivo Invites — Your story. Beautifully shared.</div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
