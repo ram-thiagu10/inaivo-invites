@@ -1,28 +1,76 @@
-/* ── DOOR OPENING CONCEPT ── */
-let doorsOpened = false;
+/* ── SCATTERED BLOOM INTRO ── */
+const INTRO_ICONS = ['🌸','🌺','🌷','🌼','🍃','🌿','🕊️','🌹','✨'];
+let introOpened = false;
+
+function scatterIntroParticles() {
+  const container = document.getElementById('intro-particles');
+  if (!container) return;
+  const w = window.innerWidth, h = window.innerHeight;
+  const count = w < 640 ? 22 : 34;
+
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('span');
+    el.className = 'intro-particle';
+    el.textContent = INTRO_ICONS[Math.floor(Math.random() * INTRO_ICONS.length)];
+
+    const startX = Math.random() * w;
+    const startY = Math.random() * h;
+    const size = 16 + Math.random() * 20;
+
+    el.style.left = startX + 'px';
+    el.style.top = startY + 'px';
+    el.style.fontSize = size + 'px';
+    el.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+    // destination: converge toward center with slight random scatter so it feels like a vortex, not a single point
+    const centerX = w / 2, centerY = h / 2;
+    const dx = (centerX - startX) + (Math.random() - 0.5) * 60;
+    const dy = (centerY - startY) + (Math.random() - 0.5) * 60;
+    el.style.setProperty('--dx', dx + 'px');
+    el.style.setProperty('--dy', dy + 'px');
+
+    container.appendChild(el);
+  }
+}
 
 function openDoors() {
-  if (doorsOpened) return;
-  doorsOpened = true;
+  if (introOpened) return;
+  introOpened = true;
 
-  const overlay = document.getElementById('door-overlay');
-  if (overlay) {
-    overlay.classList.add('opened');
-  }
+  const overlay = document.getElementById('intro-overlay');
+  const center = document.getElementById('intro-center');
+  const particles = document.querySelectorAll('.intro-particle');
 
-  // Fade in the music and sparkles slightly after the doors start opening
+  if (center) center.classList.add('fading');
+
+  // Sweep every bloom into the tornado, staggered for an organic swirl
+  particles.forEach((p) => {
+    const delay = Math.random() * 260;
+    setTimeout(() => { p.style.animationPlayState = 'running'; }, delay);
+  });
+
+  // Let the swirl finish, then dissolve the overlay to reveal the invitation
   setTimeout(() => {
+    if (overlay) overlay.classList.add('hidden');
+
     const musicToggle = document.getElementById('music-toggle');
     if (musicToggle) musicToggle.classList.add('visible');
 
     const audio = document.getElementById('bg-music');
     if (audio) {
       audio.volume = 0.25;
-      audio.play().catch(()=>{});
+      audio.play().catch(() => {});
     }
 
     if (window.startSparkleShower) window.startSparkleShower();
-  }, 600);
+
+    document.body.classList.add('intro-done');
+    initScrollReveal();
+  }, 1650);
+
+  setTimeout(() => {
+    if (overlay) overlay.style.display = 'none';
+  }, 2600);
 }
 
 /* ── MUSIC TOGGLE ── */
@@ -32,20 +80,20 @@ function toggleMusic() {
   const on  = document.getElementById('music-icon-on');
   const off = document.getElementById('music-icon-off');
   if(!audio) return;
-  
-  if (musicPlaying) { 
-    audio.pause(); 
-    if(on) on.style.display='none'; 
-    if(off) off.style.display='block'; 
-  } else { 
-    audio.play().catch(()=>{}); 
-    if(on) on.style.display='block'; 
-    if(off) off.style.display='none'; 
+
+  if (musicPlaying) {
+    audio.pause();
+    if(on) on.style.display='none';
+    if(off) off.style.display='block';
+  } else {
+    audio.play().catch(()=>{});
+    if(on) on.style.display='block';
+    if(off) off.style.display='none';
   }
   musicPlaying = !musicPlaying;
 }
 
-/* ── PASTEL AMBIENT SHOWER ── */
+/* ── GOLD AMBIENT SHOWER ── */
 (function(){
   const canvas = document.getElementById('sparkle-canvas');
   if (!canvas) return;
@@ -60,7 +108,7 @@ function toggleMusic() {
   window.addEventListener('resize', resize);
   resize();
 
-  const colors = ['#E3E7D3', '#FCEBD9', '#F5E8E8', '#F4EAE1', '#D2B48C'];
+  const colors = ['#E8CD86', '#C6A34D', '#FBF6EA', '#1F4B3F', '#6E1423'];
 
   function makeParticle(spawnAtTop){
     return {
@@ -70,7 +118,7 @@ function toggleMusic() {
       speedY: Math.random() * 0.4 + 0.2,
       drift: (Math.random() - 0.5) * 0.2,
       color: colors[Math.floor(Math.random() * colors.length)],
-      opacity: Math.random() * 0.4 + 0.4
+      opacity: Math.random() * 0.4 + 0.35
     };
   }
 
@@ -110,9 +158,63 @@ function toggleMusic() {
   };
 })();
 
-/* ── WISHES WALL SUBMISSION (RESTORED) ── */
+/* ── COUNTDOWN TIMER ── */
+// Muhurtham: 02 September 2026, 10:30 AM IST (IST = UTC+5:30 -> 05:00 UTC)
+const WEDDING_TARGET_UTC = Date.UTC(2026, 8, 2, 5, 0, 0);
+
+function updateCountdown() {
+  const daysEl = document.getElementById('cd-days');
+  const hoursEl = document.getElementById('cd-hours');
+  const minsEl = document.getElementById('cd-mins');
+  const secsEl = document.getElementById('cd-secs');
+  const noteEl = document.getElementById('countdown-note');
+  if (!daysEl) return;
+
+  const now = Date.now();
+  let diff = WEDDING_TARGET_UTC - now;
+
+  if (diff <= 0) {
+    daysEl.textContent = '00';
+    hoursEl.textContent = '00';
+    minsEl.textContent = '00';
+    secsEl.textContent = '00';
+    if (noteEl) noteEl.textContent = '🌸 The celebration has begun — thank you for being part of our story!';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const mins = Math.floor((diff / (1000 * 60)) % 60);
+  const secs = Math.floor((diff / 1000) % 60);
+
+  daysEl.textContent = String(days).padStart(2, '0');
+  hoursEl.textContent = String(hours).padStart(2, '0');
+  minsEl.textContent = String(mins).padStart(2, '0');
+  secsEl.textContent = String(secs).padStart(2, '0');
+}
+
+/* ── SCROLL REVEAL ── */
+let revealObserver = null;
+function initScrollReveal() {
+  const targets = document.querySelectorAll('.reveal');
+  if (!targets.length) return;
+
+  if (revealObserver) revealObserver.disconnect();
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  targets.forEach((t) => revealObserver.observe(t));
+}
+
+/* ── WISHES WALL SUBMISSION ── */
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoo2_KLeDevK54-qVhzj8iDgxyyYSQ7HjJqeipqjmncxCk44SS9Np3I6_3X416sux7tg/exec';
-const COUPLE_ID = 'arjun-riya'; // Updated Couple ID
+const COUPLE_ID = 'arjun-riya';
 
 function escapeHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -121,7 +223,7 @@ function escapeHtml(str) {
 function addWishCard(wish, prepend = false) {
   const wall = document.getElementById('wishes-wall');
   if (!wall) return;
-  
+
   const placeholder = document.getElementById('wishes-placeholder');
   if (placeholder) placeholder.remove();
 
@@ -174,7 +276,7 @@ async function submitWish() {
     document.getElementById('wish-relation').value = '';
     document.getElementById('wish-message').value = '';
     status.textContent = '🌸 Your wish was sent! Thank you.';
-    status.style.color = 'var(--pastel-gold)';
+    status.style.color = 'var(--gold-hover)';
   } catch (e) {
     status.textContent = '❌ Something went wrong. Please try again.';
   } finally {
@@ -199,5 +301,8 @@ async function loadWishes() {
 
 // Initializations
 window.onload = () => {
+  scatterIntroParticles();
   loadWishes();
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 };

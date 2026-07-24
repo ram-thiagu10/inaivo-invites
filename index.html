@@ -13,19 +13,14 @@
 
 <body>
 
-  <div id="door-overlay">
-    <div class="door-panel door-left">
-      <div class="door-border-inner"></div>
-    </div>
-    <div class="door-panel door-right">
-      <div class="door-border-inner"></div>
-    </div>
-    
-    <div class="door-lock" id="door-lock" onclick="openDoors()">
-      <div class="lock-circle">
-        <span style="font-size: 32px; display: block; margin-bottom: 4px;">🌸</span>
-        <p style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pastel-gold);">Tap to Enter</p>
+  <div id="intro-overlay" onclick="openDoors()">
+    <div id="intro-particles"></div>
+    <div class="intro-center" id="intro-center">
+      <div class="intro-emblem">
+        <span class="intro-emblem-icon">🌸</span>
+        <span class="intro-emblem-text">Tap to Enter</span>
       </div>
+      <p class="intro-title">Arjun &amp; Riya invite you</p>
     </div>
   </div>
 
@@ -51,9 +46,11 @@
 
   <nav>
     <a href="#couple">The Couple</a>
+    <a href="#countdown">Countdown</a>
     <a href="#events">Celebrations</a>
     <a href="#venues">Venues</a>
     <a href="#wishes">Wishes</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <div class="hero">
@@ -64,12 +61,48 @@
     <div class="hero-date">02 SEPTEMBER 2026 &bull; MUMBAI</div>
   </div>
 
+  <section id="countdown">
+    <p class="section-eyebrow reveal">Counting Down</p>
+    <h2 class="section-title reveal">To Our <em>Forever</em></h2>
+    <div class="countdown-wrap reveal">
+      <div class="countdown-frame">
+        <div class="countdown-inner">
+          <div class="countdown-grid">
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-days">00</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-hours">00</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-mins">00</span>
+              <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-num" id="cd-secs">00</span>
+              <span class="countdown-label">Seconds</span>
+            </div>
+          </div>
+          <p class="countdown-note" id="countdown-note">Until Arjun &amp; Riya say "I do" — 02 September 2026, 10:30 AM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kolam-divider">
+    <div class="line"></div>
+    <span>🌸</span>
+    <div class="line rev"></div>
+  </div>
+
   <section id="couple">
-    <p class="section-eyebrow">Introducing</p>
-    <h2 class="section-title">The Bride <em>&amp;</em> Groom</h2>
+    <p class="section-eyebrow reveal">Introducing</p>
+    <h2 class="section-title reveal">The Bride <em>&amp;</em> Groom</h2>
     
     <div class="couple-grid">
-      <div class="person-card">
+      <div class="person-card reveal">
         <div class="person-card-inner">
           <span class="person-role">The Groom</span>
           <h3 class="person-name">Arjun Sharma</h3>
@@ -81,7 +114,7 @@
         </div>
       </div>
 
-      <div class="person-card">
+      <div class="person-card reveal reveal-delay-1">
         <div class="person-card-inner">
           <span class="person-role">The Bride</span>
           <h3 class="person-name">Riya Deshmukh</h3>
@@ -102,10 +135,10 @@
   </div>
 
   <section id="events">
-    <p class="section-eyebrow">The Celebrations</p>
-    <h2 class="section-title">Wedding Schedule</h2>
+    <p class="section-eyebrow reveal">The Celebrations</p>
+    <h2 class="section-title reveal">Wedding Schedule</h2>
     <div class="events-stack">
-      <div class="event-card">
+      <div class="event-card reveal">
         <div class="event-date-block">
           <span class="event-day">01</span>
           <span class="event-month">Sept</span>
@@ -117,7 +150,7 @@
           <p class="event-venue"><span class="event-venue-name">The Grand Pastel Ballroom</span><br>Galaxy Highway Resorts, Mumbai</p>
         </div>
       </div>
-      <div class="event-card">
+      <div class="event-card reveal reveal-delay-1">
         <div class="event-date-block">
           <span class="event-day">02</span>
           <span class="event-month">Sept</span>
@@ -133,11 +166,11 @@
   </section>
 
   <section id="venues">
-    <p class="section-eyebrow">Getting There</p>
-    <h2 class="section-title"><em>Venues</em> at a Glance</h2>
+    <p class="section-eyebrow reveal">Getting There</p>
+    <h2 class="section-title reveal"><em>Venues</em> at a Glance</h2>
 
     <div class="venues-grid" style="display: flex; justify-content: center;">
-      <div class="venue-card">
+      <div class="venue-card reveal">
         <div class="venue-card-accent"></div>
         <div style="position:relative; z-index:1;">
           <p class="venue-tag">RECEPTION & WEDDING</p>
@@ -169,10 +202,10 @@
   </section>
 
   <section id="wishes">
-    <p class="section-eyebrow">From the Heart</p>
-    <h2 class="section-title">Send Your <em>Wishes</em></h2>
+    <p class="section-eyebrow reveal">From the Heart</p>
+    <h2 class="section-title reveal">Send Your <em>Wishes</em></h2>
 
-    <div class="wish-form-container">
+    <div class="wish-form-container reveal">
       <div class="wish-form-grid">
         <div>
           <label class="wish-label">Your Name *</label>
@@ -201,6 +234,61 @@
     <div id="wishes-wall" class="wishes-grid">
       <div id="wishes-placeholder" class="wishes-placeholder">
         🌸 Wishes from loved ones will appear here…
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="section-eyebrow reveal">Reach Us</p>
+    <h2 class="section-title reveal">For Any <em>Assistance</em></h2>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <p class="contact-card-sub">Groom's Side</p>
+        <h3 class="contact-card-title">Family of Arjun Sharma</h3>
+
+        <div class="contact-person">
+          <div class="contact-person-info">
+            <div class="contact-name">Devendra Sharma</div>
+            <div class="contact-relation">Father of the Groom</div>
+          </div>
+          <a class="contact-call" href="tel:7373219594" title="Call">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+        </div>
+        <div class="contact-person">
+          <div class="contact-person-info">
+            <div class="contact-name">Arjun Sharma</div>
+            <div class="contact-relation">Groom</div>
+          </div>
+          <a class="contact-call" href="tel:7373219594" title="Call">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-card reveal reveal-delay-1">
+        <p class="contact-card-sub">Bride's Side</p>
+        <h3 class="contact-card-title">Family of Riya Deshmukh</h3>
+
+        <div class="contact-person">
+          <div class="contact-person-info">
+            <div class="contact-name">Ramesh Deshmukh</div>
+            <div class="contact-relation">Father of the Bride</div>
+          </div>
+          <a class="contact-call" href="tel:7373219594" title="Call">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+        </div>
+        <div class="contact-person">
+          <div class="contact-person-info">
+            <div class="contact-name">Riya Deshmukh</div>
+            <div class="contact-relation">Bride</div>
+          </div>
+          <a class="contact-call" href="tel:7373219594" title="Call">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
